@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerListExampleButton"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerListExampleButton"
+        app:layout_constraintStart_toStartOf="@+id/recyclerListExampleButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/recyclerListExampleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Feed List Example (Recycler View)"
@@ -28,12 +28,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/tabsExampleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tabs Example (Tab layout / View Pager / Fragments)"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerListExampleButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

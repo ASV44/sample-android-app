@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.sample.app.feed.FeedActivity"></activity>
-        <activity android:name="com.sample.app.MainActivity">
+        <activity
+            android:name=".tabs.TabsActivity"
+            android:theme="@style/App.NoActionBar"/>
+        <activity android:name=".feed.FeedActivity"/>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.VIEW" /> <!--Add for suppressing warning that app is not indexed by Google-->
+                <action android:name="android.intent.action.VIEW" /> <!-- Add for suppressing warning that app is not indexed by Google -->
             </intent-filter>
         </activity>
     </application>

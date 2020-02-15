@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.sample.app.feed.FeedActivity
+import com.sample.app.tabs.TabsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,8 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         val messageText: TextView = findViewById(R.id.messageText)
 
-        button.setOnClickListener {
+        recyclerListExampleButton.setOnClickListener {
             startActivity(Intent(this, FeedActivity::class.java))
+        }
+
+        tabsExampleButton.setOnClickListener {
+            startActivity(Intent(this, TabsActivity::class.java))
         }
     }
 }
