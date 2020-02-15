@@ -1,11 +1,11 @@
-package com.sample.app.adapters
+package com.sample.app.feed.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.app.R
-import com.sample.app.models.FeedItem
-import com.sample.app.viewHolders.FeedItemViewHolder
+import com.sample.app.feed.models.FeedItem
+import com.sample.app.feed.viewHolders.FeedItemViewHolder
 
 
 class FeedRecyclerViewAdapter(private val dataSet: Array<FeedItem>) : RecyclerView.Adapter<FeedItemViewHolder>() {

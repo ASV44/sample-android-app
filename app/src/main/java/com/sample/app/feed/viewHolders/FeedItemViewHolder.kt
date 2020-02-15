@@ -1,11 +1,11 @@
-package com.sample.app.viewHolders
+package com.sample.app.feed.viewHolders
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.app.R
-import com.sample.app.models.FeedItem
+import com.sample.app.feed.models.FeedItem
 import com.squareup.picasso.Picasso
 
 class FeedItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
