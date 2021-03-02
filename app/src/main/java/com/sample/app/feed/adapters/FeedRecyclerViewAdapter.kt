@@ -8,7 +8,7 @@ import com.sample.app.feed.models.FeedItem
 import com.sample.app.feed.viewHolders.FeedItemViewHolder
 
 
-class FeedRecyclerViewAdapter(private val dataSet: Array<FeedItem>) : RecyclerView.Adapter<FeedItemViewHolder>() {
+class FeedRecyclerViewAdapter(private var dataSet: Array<FeedItem>) : RecyclerView.Adapter<FeedItemViewHolder>() {
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedItemViewHolder {
@@ -29,4 +29,9 @@ class FeedRecyclerViewAdapter(private val dataSet: Array<FeedItem>) : RecyclerVi
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+    fun updateDataSet(dataSet: Array<FeedItem>) {
+        this.dataSet = dataSet
+        notifyDataSetChanged()
+    }
 }

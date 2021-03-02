@@ -17,10 +17,9 @@ import kotlinx.coroutines.launch
 class FeedActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: FeedRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var apiService: APICommunication
-    private lateinit var dataSet: Array<FeedItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +29,7 @@ class FeedActivity : AppCompatActivity() {
         viewManager = LinearLayoutManager(this)
 
         // Create sample data set of 30 dummy elements
-        dataSet = Array(30) {
+        val dataSet = Array(30) {
             FeedItem(
                 "Amazing header",
                 "Some description",
@@ -68,13 +67,13 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun handleAPIData(data: ArrayList<Launch>) {
-        dataSet = data.map { FeedItem(
+        val dataSet = data.map { FeedItem(
             it.missionName,
             it.details ?: "No description",
             "https://cnet1.cbsistatic.com/img/2ZjmzrycBZQD9Dpnt_EnfQ7TTro=/940x0/2020/05/31/5112f3db-5af6-431c-bc0d-a8108ccad2ee/spacex-falcon-9-launch.jpg")
         }.toTypedArray()
         MainScope().launch {
-            viewAdapter.notifyDataSetChanged()
+            viewAdapter.updateDataSet(dataSet)
         }
     }
 }
