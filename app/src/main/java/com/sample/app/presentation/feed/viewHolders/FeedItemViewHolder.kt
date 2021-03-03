@@ -1,11 +1,11 @@
-package com.sample.app.feed.viewHolders
+package com.sample.app.presentation.feed.viewHolders
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.app.R
-import com.sample.app.feed.models.FeedItem
+import com.sample.app.presentation.feed.models.FeedItem
 import com.squareup.picasso.Picasso
 
 class FeedItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -17,6 +17,8 @@ class FeedItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
     fun bind(item: FeedItem) {
         headerTextView.text = item.header
         descriptionTextView.text = item.description
-        Picasso.get().load(item.image).into(imageView)
+        item.image?.let {
+            Picasso.get().load(it).into(imageView)
+        }
     }
 }

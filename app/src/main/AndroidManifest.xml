@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".tabs.TabsActivity"
+            android:name="com.sample.app.presentation.tabs.TabsActivity"
             android:theme="@style/App.NoActionBar"/>
-        <activity android:name=".feed.FeedActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.sample.app.presentation.feed.FeedActivity"/>
+        <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

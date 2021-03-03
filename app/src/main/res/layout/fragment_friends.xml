@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sample.app.tabs.fragments.FriendsFragment">
+    tools:context=".presentation.tabs.fragments.FriendsFragment">
 
     <TextView
         android:layout_width="wrap_content"

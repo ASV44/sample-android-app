@@ -1,4 +1,4 @@
-package com.sample.app.data
+package com.sample.app.data.network.error
 
 import com.google.gson.JsonParseException
 import okhttp3.Interceptor

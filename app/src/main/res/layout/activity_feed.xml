@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feed.FeedActivity">
+    tools:context=".presentation.feed.FeedActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feed_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <include
+        layout="@layout/progress_bar_layout"
+        android:id="@+id/progressOverlay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,11 @@
-package com.sample.app.tabs.adapters
+package com.sample.app.presentation.tabs.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.sample.app.tabs.fragments.CallsFragment
-import com.sample.app.tabs.fragments.FriendsFragment
-import com.sample.app.tabs.fragments.GroupsFragment
+import com.sample.app.presentation.tabs.fragments.CallsFragment
+import com.sample.app.presentation.tabs.fragments.FriendsFragment
+import com.sample.app.presentation.tabs.fragments.GroupsFragment
 
 
 class ViewPagerAdapter(fragmentManager: FragmentManager):

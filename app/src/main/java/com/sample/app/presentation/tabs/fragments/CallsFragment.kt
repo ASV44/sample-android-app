@@ -1,4 +1,4 @@
-package com.sample.app.tabs.fragments
+package com.sample.app.presentation.tabs.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sample.app.R
 
-class FriendsFragment : Fragment() {
+class CallsFragment: Fragment() {
+
     private var rootView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -16,7 +17,7 @@ class FriendsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_friends, null)
+            rootView = inflater.inflate(R.layout.fragment_calls, null)
         }
 
         return rootView

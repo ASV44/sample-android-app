@@ -1,15 +1,17 @@
-package com.sample.app.feed
+package com.sample.app.presentation.feed
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.app.R
-import com.sample.app.data.APIService
-import com.sample.app.data.models.APICommunication
-import com.sample.app.data.models.Launch
-import com.sample.app.feed.adapters.FeedRecyclerViewAdapter
-import com.sample.app.feed.models.FeedItem
+import com.sample.app.data.network.APICommunication
+import com.sample.app.data.network.models.response.Launch
+import com.sample.app.presentation.extensions.fadeIn
+import com.sample.app.presentation.extensions.fadeOut
+import com.sample.app.presentation.feed.adapters.FeedRecyclerViewAdapter
+import com.sample.app.presentation.feed.models.FeedItem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -20,23 +22,20 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var viewAdapter: FeedRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var apiService: APICommunication
+    private lateinit var progressOverlay: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
 
+        // Find progress overlay reference
+        progressOverlay = findViewById(R.id.progressOverlay)
+
         // Create Recycler view layout manager, for simple lists use Linear layout
         viewManager = LinearLayoutManager(this)
 
-        // Create sample data set of 30 dummy elements
-        val dataSet = Array(30) {
-            FeedItem(
-                "Amazing header",
-                "Some description",
-                "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-            )
-        }
-        viewAdapter = FeedRecyclerViewAdapter(dataSet)
+        // Add empty data set to recycler view adapter
+        viewAdapter = FeedRecyclerViewAdapter(emptyArray())
 
         // Find recycler view in hierarchy of elements and set layout manager and adapter
         recyclerView = findViewById<RecyclerView>(R.id.feed_recycler_view).apply {
@@ -50,30 +49,51 @@ class FeedActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
+        // Create instance of API Service
         apiService = APICommunication()
+        // Request data from API
         getPastLaunches()
     }
 
     private fun getPastLaunches() {
+        showProgress()
+        // Run network request in coroutine Global Scope (Background Thread)
         GlobalScope.launch {
             kotlin.runCatching {
+                // Request data from API
                 apiService.getPastLaunches()
             }.onSuccess {
+                // Handle success request
                 handleAPIData(it)
             }.onFailure {
+                // Handle failure and hide progress overlay
                 print(it)
+                MainScope().launch { hideProgress() }
             }
         }
     }
 
     private fun handleAPIData(data: ArrayList<Launch>) {
+        // Map requested data to FeedItem model
         val dataSet = data.map { FeedItem(
             it.missionName,
-            it.details ?: "No description",
-            "https://cnet1.cbsistatic.com/img/2ZjmzrycBZQD9Dpnt_EnfQ7TTro=/940x0/2020/05/31/5112f3db-5af6-431c-bc0d-a8108ccad2ee/spacex-falcon-9-launch.jpg")
+            it.details,
+            it.links.flickr.original.firstOrNull()?.toString())
         }.toTypedArray()
+
+        // Update UI in main scope (Main Thread)
         MainScope().launch {
+            hideProgress()
+            recyclerView.visibility = View.VISIBLE
             viewAdapter.updateDataSet(dataSet)
         }
+    }
+
+    private fun hideProgress() {
+        progressOverlay.fadeOut()
+    }
+
+    private fun showProgress() {
+        progressOverlay.fadeIn()
     }
 }

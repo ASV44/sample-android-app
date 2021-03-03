@@ -1,6 +1,6 @@
-package com.sample.app.data
+package com.sample.app.data.network
 
-import com.sample.app.data.models.Launch
+import com.sample.app.data.network.models.response.Launch
 import retrofit2.http.GET
 
 /**

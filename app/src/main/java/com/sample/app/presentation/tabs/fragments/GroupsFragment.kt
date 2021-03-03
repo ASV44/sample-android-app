@@ -1,4 +1,4 @@
-package com.sample.app.tabs.fragments
+package com.sample.app.presentation.tabs.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

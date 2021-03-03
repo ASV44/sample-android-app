@@ -1,8 +1,8 @@
-package com.sample.app.data.models
+package com.sample.app.data.network
 
-import com.sample.app.data.APIService
-import com.sample.app.data.ApiError
-import com.sample.app.data.HttpErrorInterceptor
+import com.sample.app.data.network.error.ApiError
+import com.sample.app.data.network.error.HttpErrorInterceptor
+import com.sample.app.data.network.models.response.Launch
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
