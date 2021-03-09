@@ -48,6 +48,7 @@
             android:adjustViewBounds="true"
             android:padding="8dp"
             android:src="@drawable/placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />

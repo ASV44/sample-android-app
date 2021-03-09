@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sample.app.R
+import com.sample.app.databinding.FragmentFriendsBinding
 
 class FriendsFragment : Fragment() {
-    private var rootView: View? = null
+    private lateinit var binding: FragmentFriendsBinding
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_friends, null)
-        }
+        binding = FragmentFriendsBinding.inflate(inflater)
 
-        return rootView
+        return binding.root
     }
 }

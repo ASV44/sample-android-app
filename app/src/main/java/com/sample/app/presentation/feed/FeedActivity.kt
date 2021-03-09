@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.app.R
 import com.sample.app.data.network.APICommunication
 import com.sample.app.data.network.models.response.Launch
+import com.sample.app.databinding.ActivityFeedBinding
 import com.sample.app.presentation.extensions.fadeIn
 import com.sample.app.presentation.extensions.fadeOut
 import com.sample.app.presentation.feed.adapters.FeedRecyclerViewAdapter
@@ -17,19 +17,16 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class FeedActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityFeedBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: FeedRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var apiService: APICommunication
-    private lateinit var progressOverlay: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_feed)
-
-        // Find progress overlay reference
-        progressOverlay = findViewById(R.id.progressOverlay)
+        binding = ActivityFeedBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Create Recycler view layout manager, for simple lists use Linear layout
         viewManager = LinearLayoutManager(this)
@@ -37,8 +34,8 @@ class FeedActivity : AppCompatActivity() {
         // Add empty data set to recycler view adapter
         viewAdapter = FeedRecyclerViewAdapter(emptyArray())
 
-        // Find recycler view in hierarchy of elements and set layout manager and adapter
-        recyclerView = findViewById<RecyclerView>(R.id.feed_recycler_view).apply {
+        // Get recycler view from view binding and set layout manager and adapter
+        recyclerView = binding.feedRecyclerView.apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
 
@@ -90,10 +87,11 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun hideProgress() {
-        progressOverlay.fadeOut()
+        // Access progress overlay reference from view binding
+        binding.progressOverlay.root.fadeOut()
     }
 
     private fun showProgress() {
-        progressOverlay.fadeIn()
+        binding.progressOverlay.root.fadeIn()
     }
 }

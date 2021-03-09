@@ -3,7 +3,7 @@ package com.sample.app.presentation.feed.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.app.R
+import com.sample.app.databinding.FeedCellLayoutBinding
 import com.sample.app.presentation.feed.models.FeedItem
 import com.sample.app.presentation.feed.viewHolders.FeedItemViewHolder
 
@@ -12,12 +12,14 @@ class FeedRecyclerViewAdapter(private var dataSet: Array<FeedItem>) : RecyclerVi
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedItemViewHolder {
-        // create a new view
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.feed_cell_layout, parent, false)
-        // set the view's size, margins, paddings and layout parameters
+        // Inflate view binding for feed cell
+        val binding = FeedCellLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+        )
 
-        return FeedItemViewHolder(view)
+        return FeedItemViewHolder(binding)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
