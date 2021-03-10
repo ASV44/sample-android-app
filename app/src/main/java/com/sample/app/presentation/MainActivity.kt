@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sample.app.databinding.ActivityMainBinding
 import com.sample.app.presentation.feed.FeedActivity
+import com.sample.app.presentation.navigation.NavigationActivity
 import com.sample.app.presentation.tabs.TabsActivity
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.tabsExampleButton.setOnClickListener {
             startActivity(Intent(this, TabsActivity::class.java))
+        }
+
+        binding.navigationExampleButton.setOnClickListener {
+            startActivity(Intent(this, NavigationActivity::class.java))
         }
     }
 }

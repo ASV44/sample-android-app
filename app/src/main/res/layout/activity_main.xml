@@ -37,4 +37,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerListExampleButton" />
 
+    <Button
+        android:id="@+id/navigationExampleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Navigation Example (Bottom Bar Navigation / Drawer menu)"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabsExampleButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

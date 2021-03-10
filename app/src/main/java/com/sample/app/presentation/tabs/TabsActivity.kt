@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sample.app.R
 import com.sample.app.databinding.ActivityTabsBinding
 import com.sample.app.presentation.tabs.adapters.ViewPagerAdapter
-import kotlinx.android.synthetic.main.activity_tabs.*
 
 class TabsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTabsBinding
-    private val pagerAdapter: ViewPagerAdapter = ViewPagerAdapter(this.supportFragmentManager)
+    private val pagerAdapter = ViewPagerAdapter(this.supportFragmentManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +17,7 @@ class TabsActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        viewPager.adapter = pagerAdapter
-        tabLayout.setupWithViewPager(viewPager)
+        binding.viewPager.adapter = pagerAdapter
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 }

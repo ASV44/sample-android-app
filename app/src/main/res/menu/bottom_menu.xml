@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/expenses_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/cash"
+        android:title="Expenses"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/map_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/map"
+        android:title="Map"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/setting_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/settings"
+        android:title="Settings"
+        app:showAsAction="ifRoom" />
+</menu>
