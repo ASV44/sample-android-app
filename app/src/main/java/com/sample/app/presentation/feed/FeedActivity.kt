@@ -1,27 +1,25 @@
 package com.sample.app.presentation.feed
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.app.data.network.APICommunication
-import com.sample.app.data.network.models.response.Launch
 import com.sample.app.databinding.ActivityFeedBinding
 import com.sample.app.presentation.extensions.fadeIn
 import com.sample.app.presentation.extensions.fadeOut
 import com.sample.app.presentation.feed.adapters.FeedRecyclerViewAdapter
 import com.sample.app.presentation.feed.models.FeedItem
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
-class FeedActivity : AppCompatActivity() {
+class FeedActivity : FeedInput, AppCompatActivity() {
     private lateinit var binding: ActivityFeedBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: FeedRecyclerViewAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var apiService: APICommunication
+
+    // Create instance of Feed Presenter and pass all required dependencies -> View, API Service
+    private var presenter = FeedPresenter(this, APICommunication())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,52 +44,22 @@ class FeedActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        // Create instance of API Service
-        apiService = APICommunication()
         // Request data from API
-        getPastLaunches()
+        presenter.getPastLaunches()
     }
 
-    private fun getPastLaunches() {
-        showProgress()
-        // Run network request in coroutine Global Scope (Background Thread)
-        GlobalScope.launch {
-            kotlin.runCatching {
-                // Request data from API
-                apiService.getPastLaunches()
-            }.onSuccess {
-                // Handle success request
-                handleAPIData(it)
-            }.onFailure {
-                // Handle failure and hide progress overlay
-                print(it)
-                MainScope().launch { hideProgress() }
-            }
-        }
-    }
-
-    private fun handleAPIData(data: ArrayList<Launch>) {
-        // Map requested data to FeedItem model
-        val dataSet = data.map { FeedItem(
-            it.missionName,
-            it.details,
-            it.links.flickr.original.firstOrNull()?.toString())
-        }.toTypedArray()
-
-        // Update UI in main scope (Main Thread)
-        MainScope().launch {
-            hideProgress()
-            recyclerView.visibility = View.VISIBLE
-            viewAdapter.updateDataSet(dataSet)
-        }
-    }
-
-    private fun hideProgress() {
+    override fun hideProgress() {
         // Access progress overlay reference from view binding
         binding.progressOverlay.root.fadeOut()
     }
 
-    private fun showProgress() {
+    override fun updateUI(dataSet: Array<FeedItem>) {
+        hideProgress()
+        recyclerView.visibility = View.VISIBLE
+        viewAdapter.updateDataSet(dataSet)
+    }
+
+    override fun showProgress() {
         binding.progressOverlay.root.fadeIn()
     }
 }

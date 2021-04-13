@@ -6,8 +6,8 @@ import com.sample.app.data.network.models.response.Launch
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import java.util.concurrent.TimeUnit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by Vdovicenco Alexandr on 03/02/2021.
@@ -17,7 +17,7 @@ private const val READ_TIMEOUT: Long = 3000
 private const val WRITE_TIMEOUT: Long = 3000
 private const val CONNECTION_TIMEOUT: Long = 3000
 
-class APICommunication {
+class APICommunication: APIClient {
     private val client = buildClient()
 
     private var retrofit = Retrofit.Builder()
@@ -42,7 +42,7 @@ class APICommunication {
             .build()
     }
 
-    suspend fun getPastLaunches(): ArrayList<Launch> {
+    override suspend fun getPastLaunches(): ArrayList<Launch> {
         return apiService.getPastLaunches()
     }
 }
