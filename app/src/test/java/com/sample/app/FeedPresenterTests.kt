@@ -7,6 +7,7 @@ import com.sample.app.presentation.feed.FeedInput
 import com.sample.app.presentation.feed.FeedPresenter
 import com.sample.app.presentation.feed.models.FeedItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -25,6 +26,7 @@ import java.net.URL
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
+@ExperimentalCoroutinesApi
 class FeedPresenterTests {
     val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 

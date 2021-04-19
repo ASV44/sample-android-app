@@ -5,12 +5,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.app.data.network.APICommunication
 import com.sample.app.databinding.ActivityFeedBinding
 import com.sample.app.presentation.extensions.fadeIn
 import com.sample.app.presentation.extensions.fadeOut
 import com.sample.app.presentation.feed.adapters.FeedRecyclerViewAdapter
 import com.sample.app.presentation.feed.models.FeedItem
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class FeedActivity : FeedInput, AppCompatActivity() {
     private lateinit var binding: ActivityFeedBinding
@@ -19,7 +20,7 @@ class FeedActivity : FeedInput, AppCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     // Create instance of Feed Presenter and pass all required dependencies -> View, API Service
-    private var presenter = FeedPresenter(this, APICommunication())
+    private val presenter: FeedOutput by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
