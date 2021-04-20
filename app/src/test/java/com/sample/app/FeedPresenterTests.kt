@@ -16,6 +16,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.net.URL
@@ -75,5 +76,27 @@ class FeedPresenterTests {
         verify(apiServiceMock).getPastLaunches()
         verify(feedInputMock).showProgress()
         verify(feedInputMock).updateUI(expectedDataSet)
+    }
+
+    @Test
+    fun getPastLaunches_onDataFetchError_shouldPresentErrorAlertDialog() = runBlockingTest {
+        // Init mock objects
+        val feedInputMock = mock<FeedInput>()
+        val apiServiceMock = mock<APIClient>()
+        val presenter = FeedPresenter(feedInputMock, apiServiceMock)
+
+        val errorMessage = "Network Error"
+        val error = Error(errorMessage)
+        whenever(apiServiceMock.getPastLaunches()).thenThrow(error)
+
+        // Perform tested action
+        presenter.getPastLaunches()
+
+        // Verify required methods was called with required parameters
+        verify(apiServiceMock).getPastLaunches()
+        verify(feedInputMock).showProgress()
+        verify(feedInputMock, never()).updateUI(arrayOf())
+        verify(feedInputMock).showErrorAlert(errorMessage)
+        verify(feedInputMock).hideProgress()
     }
 }

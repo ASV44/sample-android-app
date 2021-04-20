@@ -26,7 +26,7 @@ class FeedPresenter(val view: FeedInput, private val apiService: APIClient): Fee
             }.onFailure {
                 // Handle failure and hide progress overlay
                 print(it)
-                MainScope().launch { view.hideProgress() }
+                handleAPIDataError(it)
             }
         }
     }
@@ -42,6 +42,13 @@ class FeedPresenter(val view: FeedInput, private val apiService: APIClient): Fee
         // Update UI in main scope (Main Thread)
         MainScope().launch {
             view.updateUI(dataSet)
+        }
+    }
+
+    private fun handleAPIDataError(error: Throwable) {
+        MainScope().launch {
+            view.hideProgress()
+            view.showErrorAlert(error.localizedMessage ?: "Data fetching failed")
         }
     }
 }

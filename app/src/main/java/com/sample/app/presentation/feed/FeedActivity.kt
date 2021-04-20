@@ -2,6 +2,7 @@ package com.sample.app.presentation.feed
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -62,5 +63,13 @@ class FeedActivity : FeedInput, AppCompatActivity() {
 
     override fun showProgress() {
         binding.progressOverlay.root.fadeIn()
+    }
+
+    override fun showErrorAlert(message: String) {
+        AlertDialog.Builder(this)
+                .setTitle("Data Fetching Error")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show()
     }
 }

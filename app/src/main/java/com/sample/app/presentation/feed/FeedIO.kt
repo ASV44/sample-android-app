@@ -10,6 +10,7 @@ interface FeedInput {
     fun showProgress()
     fun hideProgress()
     fun updateUI(dataSet: Array<FeedItem>)
+    fun showErrorAlert(message: String)
 }
 
 interface FeedOutput {
